@@ -19,7 +19,7 @@ export const siteConfig = {
   concept: 'Want → Match → Happen',
   mission: '讓原本可能不會發生的那場球、讀書、吃飯，真的發生。',
   description:
-    '「敢不敢揪」是專為陽明交大與清華大學學生設計的即時校園活動配對 App。以活動與動機為核心，盲配不看臉、不滑卡片、免當主揪，撮合現在也想做同一件事的人。',
+    '「敢不敢揪」是專為大學生設計的即時活動配對 App。以活動與動機為核心，盲配不看臉、不滑卡片、免當主揪，撮合現在也想做同一件事的人。測試階段僅限同校配對，目前率先開放清大與交大。',
 
   // Store & Release Configuration (Editable as links become available)
   downloads: {
@@ -27,7 +27,7 @@ export const siteConfig = {
     iosAppStoreUrl: null as string | null,
     googlePlayUrl: null as string | null,
     webAppUrl: null as string | null,
-    statusText: '即將推出（雙校封測準備中）',
+    statusText: '即將推出（清大・交大封測準備中）',
     universalDownloadPath: '/download',
   },
 

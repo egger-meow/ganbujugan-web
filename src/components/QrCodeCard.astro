@@ -11,7 +11,7 @@ interface Props {
 
 const {
   title = '立即取得 敢不敢揪 App',
-  subtitle = '用手機相機掃描 QR Code，或直接前往雙校專屬下載管道',
+  subtitle = '用手機相機掃描 QR Code，或點選下方商店下載管道',
   showCompanionMascot = true,
 } = Astro.props;
 
@@ -83,7 +83,7 @@ const qrSvg = await generateQrSvg(downloadUrl, {
       </div>
 
       <p class="store-note">
-        目前為陽明交大與清華大學封測驗證階段，僅限持 @nycu.edu.tw 或 @nthu.edu.tw 學生信箱註冊。
+        目前為測試階段（同校配對），率先開放陽明交大與清華大學學生信箱（@nycu.edu.tw / @nthu.edu.tw）註冊。
       </p>
     </div>
 
