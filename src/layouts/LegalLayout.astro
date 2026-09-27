@@ -1,0 +1,343 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface TocItem {
+  id: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  lastUpdated: string;
+  documentType: 'privacy' | 'terms' | 'deletion';
+  toc: TocItem[];
+  isDraft?: boolean;
+}
+
+const {
+  title,
+  lastUpdated,
+  documentType,
+  toc,
+  isDraft = true,
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} | 敢不敢揪`} description={`敢不敢揪 (Dare2Jo) 官方${title}與相關政策條款說明`}>
+  <div class="legal-page">
+    <div class="container legal-container">
+      <!-- Legal Header -->
+      <header class="legal-header">
+        <div class="legal-badge-row">
+          <span class="badge badge-emerald">法定與隱私條款</span>
+          {isDraft && <span class="badge badge-amber">草稿審查中 (v0.1)</span>}
+        </div>
+        <h1 class="legal-title">{title}</h1>
+        <div class="legal-meta">
+          <span>最後更新日期：{lastUpdated}</span>
+          <span class="meta-sep">&bull;</span>
+          <span>適用對象：陽明交大 (NYCU) 與 清華大學 (NTHU) 學生</span>
+        </div>
+
+        {
+          isDraft && (
+            <div class="draft-notice" role="alert">
+              <div class="draft-notice-icon">⚠️</div>
+              <div class="draft-notice-content">
+                <strong>條款狀態聲明</strong>
+                <p>
+                  本文件內容依系統實際資料庫模型（SPEC.md / ERD.md）逐項對照撰寫，真實反映目前系統收集、使用與保留之資料範圍。正式上架前正由專業法律人員依台灣個人資料保護法進行完整覆核，本版本保留真實技術運作之透明度。
+                </p>
+              </div>
+            </div>
+          )
+        }
+      </header>
+
+      <!-- Legal Body: Sidebar TOC + Content -->
+      <div class="legal-layout-grid">
+        <aside class="legal-toc-sidebar" aria-label="目錄導覽">
+          <div class="toc-sticky-box">
+            <span class="toc-title">文件章節</span>
+            <nav class="toc-nav">
+              <ul>
+                {
+                  toc.map((item) => (
+                    <li>
+                      <a href={`#${item.id}`} class="toc-link">
+                        {item.text}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+            <div class="toc-quick-links">
+              <a href="/privacy" class:list={['quick-link', { current: documentType === 'privacy' }]}>
+                隱私權政策
+              </a>
+              <a href="/terms" class:list={['quick-link', { current: documentType === 'terms' }]}>
+                服務條款
+              </a>
+              <a href="/account-deletion" class:list={['quick-link', { current: documentType === 'deletion' }]}>
+                帳號刪除流程
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Markdown / HTML Content Area -->
+        <article class="legal-article">
+          <slot />
+        </article>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    background-color: var(--color-surface);
+  }
+
+  .legal-container {
+    max-width: 1040px;
+  }
+
+  .legal-header {
+    border-bottom: 1px solid var(--color-outline-variant);
+    padding-bottom: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .legal-badge-row {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .legal-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-sm);
+  }
+
+  @media (min-width: 640px) {
+    .legal-title {
+      font-size: 2.6rem;
+    }
+  }
+
+  .legal-meta {
+    font-size: 0.9rem;
+    color: var(--color-text-subtle);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+  }
+
+  .meta-sep {
+    color: var(--color-outline);
+  }
+
+  .draft-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    background-color: var(--color-tertiary-container);
+    border: 1px solid rgba(217, 119, 6, 0.25);
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .draft-notice-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .draft-notice-content strong {
+    display: block;
+    color: var(--color-tertiary);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .draft-notice-content p {
+    font-size: 0.88rem;
+    color: var(--color-text-main);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .legal-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  @media (min-width: 840px) {
+    .legal-layout-grid {
+      grid-template-columns: 260px 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  .legal-toc-sidebar {
+    display: none;
+  }
+
+  @media (min-width: 840px) {
+    .legal-toc-sidebar {
+      display: block;
+    }
+  }
+
+  .toc-sticky-box {
+    position: sticky;
+    top: 96px;
+    background-color: var(--color-surface-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .toc-title {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-md);
+  }
+
+  .toc-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .toc-link {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    display: block;
+    transition: all var(--transition-fast);
+  }
+
+  .toc-link:hover {
+    color: var(--color-primary);
+    background-color: var(--color-surface-container-low);
+  }
+
+  .toc-quick-links {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px dashed var(--color-outline-variant);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .quick-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  .quick-link.current {
+    color: var(--color-primary);
+    background-color: var(--color-primary-container);
+  }
+
+  /* Article typography */
+  .legal-article {
+    max-width: 740px;
+    color: var(--color-text-main);
+  }
+
+  .legal-article :global(h2) {
+    font-size: 1.55rem;
+    font-weight: 700;
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--color-outline-variant);
+    scroll-margin-top: 100px;
+  }
+
+  .legal-article :global(h3) {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    scroll-margin-top: 100px;
+  }
+
+  .legal-article :global(p) {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .legal-article :global(ul),
+  .legal-article :global(ol) {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-xl);
+  }
+
+  .legal-article :global(li) {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal-article :global(strong) {
+    color: var(--color-text-main);
+    font-weight: 700;
+  }
+
+  .legal-article :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-lg) 0;
+    font-size: 0.92rem;
+  }
+
+  .legal-article :global(th),
+  .legal-article :global(td) {
+    border: 1px solid var(--color-outline);
+    padding: 10px 14px;
+    text-align: left;
+  }
+
+  .legal-article :global(th) {
+    background-color: var(--color-surface-card);
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .legal-article :global(td) {
+    background-color: var(--color-surface-lowest);
+    color: var(--color-text-muted);
+  }
+
+  .legal-article :global(code) {
+    background-color: var(--color-surface-container-high);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+  }
+</style>

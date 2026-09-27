@@ -1,0 +1,285 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { siteConfig } from '../config/site';
+
+const toc = [
+  { id: 'in-app-path', text: '一、App 內建自助刪除路徑' },
+  { id: 'data-handling', text: '二、個人資料清理與去識別化範圍' },
+  { id: 'retained-data', text: '三、保留之共用客觀紀錄' },
+  { id: 'consequences', text: '四、不可復原性與驗證影響' },
+  { id: 'external-request', text: '五、外部刪除申請管道' },
+];
+---
+
+<LegalLayout
+  title="帳號刪除流程說明"
+  lastUpdated="2026-09-27"
+  documentType="deletion"
+  toc={toc}
+  isDraft={false}
+>
+  <section id="in-app-path">
+    <h2>一、App 內建自助刪除路徑</h2>
+    <p>
+      依據 Apple App Store Review Guideline 5.1.1(v) 與 Google Play 帳號安全規範，「敢不敢揪」已在應用程式內實作完整的自主刪除功能，任何使用者均可於登入後隨時自行觸發，<strong>無需經過客服人工審查、無需填寫表單或等待工作天</strong>。
+    </p>
+
+    <div class="step-guide">
+      <div class="step-card">
+        <span class="step-num">1</span>
+        <div class="step-desc">
+          <strong>開啟個人設定</strong>
+          <p>進入 App 底部的「個人檔案 (Profile)」頁籤，捲動至最下方。</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <span class="step-num">2</span>
+        <div class="step-desc">
+          <strong>點擊「刪除帳號」</strong>
+          <p>在危險操作區點擊「刪除帳號」按鈕。</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <span class="step-num">3</span>
+        <div class="step-desc">
+          <strong>確認不可逆告知</strong>
+          <p>系統將彈出二次確認對話框，明確提示刪除後所有識別資料即刻清空且不可復原。</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <span class="step-num">4</span>
+        <div class="step-desc">
+          <strong>系統自動執行並登出</strong>
+          <p>後端完成兩階段業務去識別化與驗證清算後，App 將自動登出並重置為初始未登入狀態。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="data-handling">
+    <h2>二、個人資料清理與去識別化範圍</h2>
+    <p>
+      當你在 App 內點擊確認刪除時，系統後端程序（<code>delete_account()</code> RPC）將在單一交易內立即執行下列清理作業：
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>資料欄位 / 項目</th>
+          <th>實際處置方式</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>學校信箱 (Email)</td>
+          <td>以 <code>deleted+[UUID]</code> 系統佔位字串替換，解除原信箱綁定</td>
+          <td>永久去識別化</td>
+        </tr>
+        <tr>
+          <td>顯示名稱 (Display Name)</td>
+          <td>替換為「已刪除的使用者」佔位文字</td>
+          <td>永久去識別化</td>
+        </tr>
+        <tr>
+          <td>頭像照片 (Avatar URL)</td>
+          <td>從儲存空間解除關聯並重置為空</td>
+          <td>永久清除</td>
+        </tr>
+        <tr>
+          <td>外部聯絡方式 (IG / LINE / Discord)</td>
+          <td>所有通訊帳號完全清空為 NULL</td>
+          <td>永久清除</td>
+        </tr>
+        <tr>
+          <td>個人簡介 (Bio) 與性別</td>
+          <td>清空為 NULL</td>
+          <td>永久清除</td>
+        </tr>
+        <tr>
+          <td>科系 (Department)</td>
+          <td>清空為 NULL</td>
+          <td>永久清除</td>
+        </tr>
+        <tr>
+          <td>推播通知歷史紀錄 (Notification Inbox)</td>
+          <td>該使用者之個人收件匣紀錄全數直接物理刪除</td>
+          <td>物理刪除</td>
+        </tr>
+        <tr>
+          <td>防重複配對暫存紀錄 (Avoidance Pair)</td>
+          <td>系統為避免短期重複遇到相同對象的暫存紀錄直接刪除</td>
+          <td>物理刪除</td>
+        </tr>
+        <tr>
+          <td>尚未成局之配對發起 (Pending Requests)</td>
+          <td>
+            若你是發起人，該發起直接標記為 CANCELLED 解散；若為他人發起之成員，自動標記為 LEFT
+          </td>
+          <td>即時解散 / 退出</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="retained-data">
+    <h2>三、保留之共用客觀紀錄說明</h2>
+    <p>
+      為了維護「曾與你同場活動的其他校園同學」的出席信用品質與歷史活動紀錄完整性，下列<strong>非個人識別性之客觀活動數據</strong>將維持保留：
+    </p>
+    <ul>
+      <li>
+        <strong>歷史活動場次基本資訊</strong>：曾參與活動之類型、時間點、地點投票總得票數。
+      </li>
+      <li>
+        <strong>集合點與完成回報統計</strong>：歷史活動的最終集合地點以及結算時之出席人頭統計。
+      </li>
+    </ul>
+    <p>
+      <strong>重要說明</strong>：上述共用紀錄已完全與你的姓名、頭像、信箱及聯絡方式脫鉤。在其他成員的歷史清單中，你將僅顯示為匿名且無從追蹤的「已刪除的使用者」。
+    </p>
+  </section>
+
+  <section id="consequences">
+    <h2>四、不可復原性與驗證影響</h2>
+    <div class="notice-card" style="padding: var(--space-lg); margin: var(--space-md) 0;">
+      <h3 style="color: var(--color-primary); margin-top: 0;">刪除後的帳號狀態</h3>
+      <ul>
+        <li>
+          <strong>立即阻斷所有操作</strong>：帳號標記 <code>deleted_at</code> 後，所有身分驗證相關操作均將被系統核心以 <code>ACCOUNT_DELETED</code> 拒絕。
+        </li>
+        <li>
+          <strong>無法復原</strong>：一旦完成刪除，沒有任何管理員後台或客服能將原帳號、出席紀錄或可信度指標「復原」。
+        </li>
+        <li>
+          <strong>重新註冊為全新帳號</strong>：若你未來再次使用相同的學校信箱登入，系統將為你建立一個全新的使用者識別碼，過往累積的所有紀錄、評價與歷史一律歸零，無法溯及既往。
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="external-request">
+    <h2>五、外部刪除申請管道</h2>
+    <p>
+      若你已無法在手機上安裝或登入 App（例如裝置遺失或系統版本不支援），你亦可透過外部申請管道請求刪除你的帳號資料：
+    </p>
+
+    <div class="external-request-box">
+      <h4>外部申請須知</h4>
+      <p>
+        為防止他人冒名惡意刪除他人帳號，外部申請<strong>必須使用該帳號當初綁定之 @nycu.edu.tw 或 @nthu.edu.tw 學校信箱</strong>寄送申請。
+      </p>
+      <div class="contact-status-banner">
+        <span>客服/支援管道狀態：</span>
+        {
+          siteConfig.contact.supportEmail ? (
+            <a href={`mailto:${siteConfig.contact.supportEmail}`} class="support-email-link">
+              {siteConfig.contact.supportEmail}
+            </a>
+          ) : (
+            <span class="pending-pill">
+              正式客服信箱配置中（請透過 GitHub 儲存庫 Issue 聯絡開發團隊）
+            </span>
+          )
+        }
+      </div>
+      <p class="verification-note">
+        收到信件後，系統管理員將驗證信箱寄件者所有權，並於 7 個工作日內於後端執行 <code>delete_account()</code> 去識別化程序。
+      </p>
+    </div>
+  </section>
+</LegalLayout>
+
+<style>
+  .step-guide {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+  }
+
+  @media (min-width: 640px) {
+    .step-guide {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .step-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    background-color: var(--color-surface-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  .step-desc strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--color-text-main);
+    margin-bottom: 2px;
+  }
+
+  .step-desc p {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .external-request-box {
+    background-color: var(--color-surface-lowest);
+    border: 1px solid var(--color-outline);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin: var(--space-md) 0;
+  }
+
+  .external-request-box h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact-status-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+    background-color: var(--color-surface);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    margin: var(--space-md) 0;
+    font-size: 0.9rem;
+  }
+
+  .pending-pill {
+    background-color: var(--color-surface-container-high);
+    color: var(--color-text-muted);
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    font-size: 0.82rem;
+  }
+
+  .verification-note {
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+    margin: 0;
+  }
+</style>

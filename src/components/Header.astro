@@ -1,0 +1,158 @@
+---
+import { assets } from '../config/assets';
+import { siteConfig } from '../config/site';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const navLinks = [
+  { href: '/#how-it-works', label: '怎麼玩' },
+  { href: '/#activities', label: '活動類型' },
+  { href: '/#safety', label: '安全機制' },
+  { href: '/#faq', label: '常見問答' },
+  { href: '/download', label: '下載 App' },
+  { href: '/support', label: '支援' },
+];
+---
+
+<header class="site-header">
+  <div class="container header-container">
+    <a href="/" class="brand" aria-label="敢不敢揪 首頁">
+      <img
+        src={assets.appIcon.src}
+        alt={assets.appIcon.alt}
+        width="40"
+        height="40"
+        class="brand-icon"
+      />
+      <div class="brand-text">
+        <span class="brand-title">{siteConfig.siteName}</span>
+        <span class="brand-sub">NYCU &times; NTHU</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="主要導覽">
+      <ul class="nav-list">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class:list={['nav-link', { active: currentPath === link.href }]}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-action">
+      <a href="/download" class="btn btn-primary btn-pill">
+        <span>取得 App</span>
+        <span class="status-dot" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-glass-border);
+    transition: all var(--transition-fast);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+  }
+
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .brand-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    letter-spacing: -0.01em;
+  }
+
+  .brand-sub {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .desktop-nav {
+      display: block;
+    }
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    list-style: none;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    padding: 6px 4px;
+    border-radius: var(--radius-sm);
+    transition: color var(--transition-fast);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-primary);
+  }
+
+  .header-action {
+    display: flex;
+    align-items: center;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-tertiary-yellow);
+    box-shadow: 0 0 6px var(--color-tertiary-yellow);
+  }
+</style>

@@ -1,0 +1,261 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QrCodeCard from '../components/QrCodeCard.astro';
+import { assets } from '../config/assets';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout
+  title={`下載 App | ${siteConfig.siteName}`}
+  description="敢不敢揪 (Dare2Jo) 官方下載專頁。陽明交大與清華大學專屬即時活動配對 App，手機掃描或點擊下載。"
+>
+  <div class="download-page">
+    <div class="container download-container">
+      <div class="download-header-banner">
+        <div class="header-badges">
+          <span class="badge badge-emerald">雙校限定封測</span>
+          <span class="badge badge-sky">iOS & Android</span>
+        </div>
+        <h1 class="page-title">下載「{siteConfig.siteName}」</h1>
+        <p class="page-subtitle">
+          {siteConfig.tagline} {siteConfig.mission}
+        </p>
+      </div>
+
+      <!-- Main Download Card Component with build-time QR and store buttons -->
+      <section class="main-card-section">
+        <QrCodeCard
+          title="手機相機掃描即刻下載"
+          subtitle="雙校正式上線後，此通用連結將自動導引至符合您裝置之應用程式商店"
+          showCompanionMascot={true}
+        />
+      </section>
+
+      <!-- App Specifications & Security Information -->
+      <section class="specs-section">
+        <h2 class="specs-title">應用程式資訊與系統需求</h2>
+        <div class="specs-grid">
+          <div class="spec-item notice-card">
+            <span class="spec-label">支援系統</span>
+            <span class="spec-value">iOS 16+ / Android 10+</span>
+            <p class="spec-desc">支援最新智慧型手機規格，極致流暢之原生觸感。</p>
+          </div>
+
+          <div class="spec-item notice-card">
+            <span class="spec-label">適用對象</span>
+            <span class="spec-value">陽明交大 & 清華大學</span>
+            <p class="spec-desc">需持有 @nycu.edu.tw 或 @nthu.edu.tw 信箱完成驗證。</p>
+          </div>
+
+          <div class="spec-item notice-card">
+            <span class="spec-label">軟體資費</span>
+            <span class="spec-value">完全免費 / 無商業廣告</span>
+            <p class="spec-desc">校園即時活動純淨媒合，無廣告推銷干擾。</p>
+          </div>
+
+          <div class="spec-item notice-card">
+            <span class="spec-label">當前發行狀態</span>
+            <span class="spec-value">封閉測試準備中</span>
+            <p class="spec-desc">即將於 App Store 與 Google Play 開放公開下載。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mascot Celebration Art -->
+      <section class="celebration-section notice-card">
+        <div class="celebration-content">
+          <div class="celebration-text">
+            <h2>成局就在一瞬間</h2>
+            <p>
+              告別在社團發文等回覆的漫長等待，也告別看臉挑人的社交焦慮。只要你想出發，校園裡一定有人現在也正想一起。
+            </p>
+            <div class="celebration-chips">
+              <span class="chip-item">🏀 籃球</span>
+              <span class="chip-item">🏸 羽球</span>
+              <span class="chip-item">🍜 吃飯</span>
+              <span class="chip-item">📖 讀書</span>
+              <span class="chip-item">🎲 桌遊</span>
+              <span class="chip-item">✨ 先聚了再說</span>
+            </div>
+          </div>
+          <div class="celebration-img-wrap">
+            <img
+              src={assets.productStates.matchSuccess.src}
+              alt={assets.productStates.matchSuccess.alt}
+              width="320"
+              height="320"
+              loading="lazy"
+              class="celebration-img"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .download-page {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    background-color: var(--color-surface);
+  }
+
+  .download-container {
+    max-width: 960px;
+  }
+
+  .download-header-banner {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .header-badges {
+    display: inline-flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-xs);
+  }
+
+  @media (min-width: 640px) {
+    .page-title {
+      font-size: 2.8rem;
+    }
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .main-card-section {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .specs-section {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .specs-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+
+  .specs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .specs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 860px) {
+    .specs-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .spec-item {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .spec-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+    margin-bottom: 4px;
+  }
+
+  .spec-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-xs);
+  }
+
+  .spec-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .celebration-section {
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, var(--color-surface-lowest) 0%, var(--color-primary-container) 100%);
+    border: 1px solid var(--color-outline-variant);
+  }
+
+  .celebration-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  @media (min-width: 720px) {
+    .celebration-content {
+      grid-template-columns: 1.4fr 1fr;
+    }
+  }
+
+  .celebration-text h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-primary-on-container);
+    margin-bottom: var(--space-xs);
+  }
+
+  .celebration-text p {
+    font-size: 1rem;
+    color: var(--color-primary-on-container);
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+  }
+
+  .celebration-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .chip-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--color-primary-on-container);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+  .celebration-img-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .celebration-img {
+    max-width: 240px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.1));
+  }
+</style>

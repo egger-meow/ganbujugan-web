@@ -1,0 +1,121 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'service', text: '一、服務內容' },
+  { id: 'eligibility', text: '二、帳號資格' },
+  { id: 'prohibited', text: '三、禁止行為' },
+  { id: 'ugc', text: '四、使用者生成內容規範' },
+  { id: 'violations', text: '五、違規處理與檢舉機制' },
+  { id: 'disclaimer', text: '六、免責聲明' },
+  { id: 'amendments', text: '七、條款修改與聯絡' },
+];
+---
+
+<LegalLayout
+  title="服務條款"
+  lastUpdated="2026-09-27"
+  documentType="terms"
+  toc={toc}
+  isDraft={true}
+>
+  <section id="service">
+    <h2>一、服務內容</h2>
+    <p>
+      「敢不敢揪」（以下稱「本服務」）為國立陽明交通大學（NYCU）與國立清華大學（NTHU）在校成員提供臨時活動夥伴的即時媒合服務。使用本服務即代表你同意遵守本條款所有規定；若你不同意本條款任何內容，請立即停止使用本服務。
+    </p>
+  </section>
+
+  <section id="eligibility">
+    <h2>二、帳號資格</h2>
+    <ul>
+      <li>
+        本服務僅開放持有 <code>@nycu.edu.tw</code> 或 <code>@nthu.edu.tw</code> 學校官方信箱之成員註冊。
+      </li>
+      <li>
+        你必須以真實學校信箱使用本服務，<strong>嚴禁冒充他人身份、盜用他人學校信箱、或使用虛構身份資料註冊</strong>。
+      </li>
+      <li>
+        每一組學校信箱僅能綁定單一帳號。帳號一經刪除後若再次註冊，將生成全新且獨立之帳號，過往紀錄無法轉移。
+      </li>
+    </ul>
+  </section>
+
+  <section id="prohibited">
+    <h2>三、禁止行為</h2>
+    <p>在使用本服務期間，你同意絕對不會從事以下行為：</p>
+    <ol>
+      <li>
+        <strong>騷擾與不當言語</strong>：對其他成員進行言語騷擾、跟蹤、恐嚇、性騷擾、或任何足以造成他人恐懼與不適之言行。
+      </li>
+      <li>
+        <strong>冒名頂替</strong>：偽裝成其他同學、本服務管理團隊成員或第三方機構。
+      </li>
+      <li>
+        <strong>不當與色情內容</strong>：在個人自介、活動類型提案、地點提案、集合地點、見面特徵提示等任何文字欄位中，張貼色情、猥褻或具有性暗示之文字。
+      </li>
+      <li>
+        <strong>違法與危險情事</strong>：利用媒合之活動進行任何違反中華民國法律之活動，包括但不限於詐欺、毒品、賭博或非法金錢借貸。
+      </li>
+      <li>
+        <strong>系統濫用與干擾</strong>：惡意大量發起無意義配對請求、濫用邀請連結、刻意惡意棄單未出席、或以機器人程式干擾撮合系統。
+      </li>
+    </ol>
+  </section>
+
+  <section id="ugc">
+    <h2>四、使用者生成內容規範 (UGC)</h2>
+    <p>本服務在以下環節開放使用者自由輸入文字：</p>
+    <ul>
+      <li><strong>活動類型提案</strong>（<code>propose_activity_type</code>）</li>
+      <li><strong>校園地點提案</strong>（<code>propose_location</code>）</li>
+      <li><strong>集合地點描述</strong>（Meeting Point）與<strong>見面特徵提示</strong>（Meeting Hint）</li>
+    </ul>
+    <p>所有文字內容必須遵守以下準則：</p>
+    <ul>
+      <li>內容必須與其特定欄位功能相符，嚴禁置入商業廣告、垃圾訊息或違反第三條禁止行為之文字。</li>
+      <li>活動類型與自訂地點均設有管理審核機制，審核通過前不會列入公開清單；若經審核通過後接獲檢舉查證屬實，將立即下架並處置提案者帳號。</li>
+    </ul>
+  </section>
+
+  <section id="violations">
+    <h2>五、違規處理與檢舉機制</h2>
+    <ul>
+      <li>
+        <strong>主動封鎖</strong>：若你對某位成員感到不適，可於活動介面直接點擊封鎖。封鎖為單向生效，對方不會收到通知，未來系統將永久避免撮合該成員與你同組。
+      </li>
+      <li>
+        <strong>檢舉通報</strong>：若發現其他成員有違反條款或不當言行，可透過 App 內檢舉功能即刻通報，團隊將調閱相關紀錄進行處理。
+      </li>
+      <li>
+        <strong>處分措施</strong>：違反條款者，依情節輕重將面臨：
+        <ul>
+          <li><strong>暫時停權</strong>：連續未出席或違規者，帳號將暫時停止發起或加入配對功能。</li>
+          <li><strong>永久強制刪除</strong>：重大違規者，帳號將直接進行去識別化強制移除。</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section id="disclaimer">
+    <h2>六、免責聲明</h2>
+    <ul>
+      <li>
+        本服務僅提供線上即時活動媒合與協調工具，<strong>對於使用者實體碰面後所發生的任何個人行為、爭端或意外，平台不承擔法律或民事損害賠償責任</strong>。成員應自行評估線下環境安全並保持必要警覺。
+      </li>
+      <li>
+        學校信箱僅用於驗證曾具備雙校學生或校友信箱資格，無法 100% 保證現處在學狀態。使用者應理性互動。
+      </li>
+    </ul>
+  </section>
+
+  <section id="amendments">
+    <h2>七、條款修改與聯絡</h2>
+    <p>
+      我們可能配合法規變動或產品功能調整修訂本條款。修訂後將更新頂端之「最後更新日期」。
+    </p>
+    <p>
+      若對服務條款有任何建議或疑問，請參閱 <a href="/support">支援頁面</a>，或透過開源社群議題與我們討論。
+    </p>
+  </section>
+</LegalLayout>

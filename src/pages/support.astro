@@ -1,0 +1,413 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { assets } from '../config/assets';
+import { siteConfig } from '../config/site';
+
+const faqs = [
+  {
+    q: '收不到登入驗證碼（OTP）怎麼辦？',
+    a: '請先檢查學校信箱的「垃圾郵件」或「垃圾桶」匣。部分學校伺服器會將外部郵件過濾。若仍未收到，請等待 60 秒後點擊「重新寄送驗證碼」。',
+  },
+  {
+    q: '為什麼我的發起遲遲沒有配對成功？',
+    a: '系統採用「活動類型、時間範圍、校區、人數設定」四重對齊。若久未配對，可能是目前該校區該時段人數較少。建議將時間範圍拉寬至 1~2 小時，或選擇熱門時段。',
+  },
+  {
+    q: '配對成立後如果突然有急事，可以取消嗎？',
+    a: '可以，但請在活動開始前盡早於 App 內取消。若活動已進入即將開始或開始後才取消，系統將依規則記錄一次「臨時取消 (Late Cancel)」，並設有 30 分鐘發起冷卻時間以維護整體校園信任。',
+  },
+  {
+    q: '活動現場遇到成員未出席（No-show）怎麼處理？',
+    a: '活動結束後系統會跳出「出席回報」。請誠實回報未出席成員，系統將自動扣減其可信度積分；累積多次未出席者將被系統自動暫時停權。',
+  },
+  {
+    q: '遇到令人不適的行為如何處理？',
+    a: '請於活動頁面立即點擊該成員的「檢舉」並選擇具體原因；同時可點擊「封鎖」，封鎖後系統未來將永久不再將該成員與你撮合至同一場活動。',
+  },
+];
+---
+
+<BaseLayout
+  title={`支援中心與常見問題 | ${siteConfig.siteName}`}
+  description="敢不敢揪 (Dare2Jo) 官方支援中心：帳號登入、活動配對、現場簽到、安全檢舉與客服管道說明。"
+>
+  <div class="support-page">
+    <div class="container support-container">
+      <!-- Support Header -->
+      <header class="support-header">
+        <div class="header-text">
+          <div class="support-badge-row">
+            <span class="badge badge-emerald">支援中心</span>
+            <span class="badge badge-neutral">App Store Support URL</span>
+          </div>
+          <h1 class="support-title">我們能為你提供什麼協助？</h1>
+          <p class="support-subtitle">
+            了解「敢不敢揪」的核心機制、帳號登入、活動配對疑難排解與安全保障。
+          </p>
+        </div>
+
+        <div class="support-mascot">
+          <img
+            src={assets.stickers.confusedQuestion.src}
+            alt={assets.stickers.confusedQuestion.alt}
+            width="120"
+            height="90"
+            class="mascot-question"
+          />
+        </div>
+      </header>
+
+      <!-- Support Topic Grid -->
+      <div class="topics-grid">
+        <!-- Topic 1 -->
+        <div class="topic-card notice-card">
+          <div class="topic-icon">🔐</div>
+          <h3>帳號與校園信箱</h3>
+          <p>
+            僅限陽明交大 (<code>@nycu.edu.tw</code>) 與清華大學 (<code>@nthu.edu.tw</code>) 信箱驗證註冊，免設密碼，直接透過一次性安全碼登入。
+          </p>
+          <ul class="topic-list">
+            <li>信箱自動判別學校，不可自行偽造</li>
+            <li>換手機登入不掉紀錄</li>
+            <li>登入時請留意信箱垃圾郵件匣</li>
+          </ul>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="topic-card notice-card">
+          <div class="topic-icon">⚡</div>
+          <h3>配對與成局機制</h3>
+          <p>
+            「Want &rarr; Match &rarr; Happen」動機撮合。在時間、校區與活動意向完全重疊時即刻成行。
+          </p>
+          <ul class="topic-list">
+            <li>盲配原則：配對前無外貌瀏覽</li>
+            <li>1~2 人活動啟用「安全雙向確認」</li>
+            <li>活動前全員投票鎖定活動精確地點</li>
+          </ul>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="topic-card notice-card">
+          <div class="topic-icon">🛡️</div>
+          <h3>安全、檢舉與封鎖</h3>
+          <p>
+            打造健康且有信任感的真實校園生活圈，內建完善的安全把關機制。
+          </p>
+          <ul class="topic-list">
+            <li>單向封鎖：對方不知情，永久不再碰面</li>
+            <li>出席回報與個人可信度等級評定</li>
+            <li>無站內私訊，降低不當騷擾風險</li>
+          </ul>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="topic-card notice-card">
+          <div class="topic-icon">🗑️</div>
+          <h3>帳號刪除管理</h3>
+          <p>
+            隨時隨地可於 App 內自助完整清空所有個人識別資料與聯絡方式。
+          </p>
+          <div class="topic-action">
+            <a href="/account-deletion" class="btn btn-secondary btn-pill">
+              查看詳細刪除說明 &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <section class="faq-section">
+        <h2 class="faq-heading">常見問答 (FAQ)</h2>
+        <div class="faq-list">
+          {
+            faqs.map((faq, index) => (
+              <details class="faq-item" open={index === 0}>
+                <summary class="faq-question">
+                  <span>{faq.q}</span>
+                  <span class="faq-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="faq-answer">
+                  <p>{faq.a}</p>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Contact Support Area -->
+      <section class="contact-card notice-card">
+        <div class="contact-content">
+          <h2>仍需要協助？聯絡開發團隊</h2>
+          <p>
+            若你在 App 使用過程發現程式問題、活動異常或任何改進建議，歡迎隨時通報：
+          </p>
+
+          <div class="contact-methods">
+            <div class="method-item">
+              <span class="method-label">官方客服信箱：</span>
+              {
+                siteConfig.contact.supportEmail ? (
+                  <a href={`mailto:${siteConfig.contact.supportEmail}`} class="method-link">
+                    {siteConfig.contact.supportEmail}
+                  </a>
+                ) : (
+                  <span class="method-pending">
+                    客服信箱正在建置中（尚未指派）
+                  </span>
+                )
+              }
+            </div>
+
+            <div class="method-item">
+              <span class="method-label">開源 Issue 回報：</span>
+              <a
+                href={`${siteConfig.contact.githubRepoUrl}/issues`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="method-link"
+              >
+                GitHub Issue Tracker
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .support-page {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    background-color: var(--color-surface);
+  }
+
+  .support-container {
+    max-width: 960px;
+  }
+
+  .support-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    border-bottom: 1px solid var(--color-outline-variant);
+    padding-bottom: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .support-badge-row {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .support-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-xs);
+  }
+
+  @media (min-width: 640px) {
+    .support-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .support-subtitle {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    max-width: 640px;
+  }
+
+  .support-mascot {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .support-mascot {
+      display: block;
+      flex-shrink: 0;
+    }
+  }
+
+  .mascot-question {
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-3xl);
+  }
+
+  @media (min-width: 640px) {
+    .topics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .topic-card {
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .topic-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .topic-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+  }
+
+  .topic-card p {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+  }
+
+  .topic-list {
+    margin-top: auto;
+    padding-left: var(--space-lg);
+    font-size: 0.88rem;
+    color: var(--color-text-subtle);
+  }
+
+  .topic-list li {
+    margin-bottom: 4px;
+  }
+
+  .topic-action {
+    margin-top: auto;
+    padding-top: var(--space-sm);
+  }
+
+  .faq-section {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .faq-heading {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: var(--space-lg);
+    color: var(--color-text-main);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .faq-item {
+    background-color: var(--color-surface-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color var(--transition-fast);
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-toggle {
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    transition: transform var(--transition-fast);
+  }
+
+  .faq-item[open] .faq-toggle {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 var(--space-lg) var(--space-lg);
+  }
+
+  .faq-answer p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .contact-card {
+    padding: var(--space-2xl);
+    background: linear-gradient(135deg, var(--color-surface-lowest) 0%, var(--color-surface-card) 100%);
+    border: 1px solid var(--color-outline);
+  }
+
+  .contact-content h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact-content p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .method-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.95rem;
+  }
+
+  .method-label {
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .method-link {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .method-pending {
+    background-color: var(--color-surface-container-high);
+    color: var(--color-text-subtle);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+  }
+</style>

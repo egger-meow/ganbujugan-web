@@ -1,0 +1,539 @@
+---
+import { assets } from '../config/assets';
+import { siteConfig } from '../config/site';
+import { generateQrSvg } from '../utils/qrcode';
+
+interface Props {
+  variant?: 'hero' | 'compact' | 'poster';
+  showQr?: boolean;
+}
+
+const { variant = 'hero', showQr = true } = Astro.props;
+
+const qrSvg = showQr
+  ? await generateQrSvg(
+      `${siteConfig.canonicalUrl}${siteConfig.downloads.universalDownloadPath}`,
+      {
+        margin: 1,
+        color: {
+          dark: '#059669',
+          light: '#ffffff',
+        },
+      }
+    )
+  : null;
+---
+
+<div class:list={['mascot-board', `variant-${variant}`]}>
+  <div class="board-inner">
+    <!-- Notice Board Pins / Header -->
+    <div class="board-header">
+      <div class="board-badge">
+        <span class="pin-dot" aria-hidden="true"></span>
+        <span class="board-badge-text">校園即時看板・雙校限定</span>
+      </div>
+      <div class="campus-pills">
+        <span class="pill-tag nycu">交大 NYCU</span>
+        <span class="pill-tag nthu">清大 NTHU</span>
+      </div>
+    </div>
+
+    <!-- Main Board Content Grid -->
+    <div class="board-grid">
+      <!-- Mascot Artwork Column -->
+      <div class="mascot-col">
+        <div class="mascot-wrapper">
+          <img
+            src={assets.mascot.heroPointing.src}
+            alt={assets.mascot.heroPointing.alt}
+            width={assets.mascot.heroPointing.width}
+            height={assets.mascot.heroPointing.height}
+            loading={variant === 'hero' ? 'eager' : 'lazy'}
+            decoding={variant === 'hero' ? 'auto' : 'async'}
+            class="mascot-img"
+          />
+
+          <!-- Floating Accent Stickers -->
+          <div class="sticker-floater sticker-1" title="打球">
+            <img
+              src={assets.stickers.basketball.src}
+              alt={assets.stickers.basketball.alt}
+              width="64"
+              height="64"
+              loading="lazy"
+            />
+          </div>
+          <div class="sticker-floater sticker-2" title="苦讀自習">
+            <img
+              src={assets.stickers.studyingLaptop.src}
+              alt={assets.stickers.studyingLaptop.alt}
+              width="72"
+              height="72"
+              loading="lazy"
+            />
+          </div>
+          <div class="sticker-floater sticker-3" title="宵夜拉麵">
+            <img
+              src={assets.stickers.eatingRamen.src}
+              alt={assets.stickers.eatingRamen.alt}
+              width="68"
+              height="68"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Copy & Download CTA Column -->
+      <div class="info-col">
+        <div class="info-content">
+          <div class="tag-row">
+            <span class="activity-chip">🏀 打場球</span>
+            <span class="activity-chip">📖 浩然自習</span>
+            <span class="activity-chip">🍜 宵夜吃點</span>
+            <span class="activity-chip">✨ 先聚了再說</span>
+          </div>
+
+          <h2 class="board-heading">
+            想做什麼，現在就揪。<br />
+            <span class="highlight">找到現在也想一起的人。</span>
+          </h2>
+
+          <p class="board-lead">
+            免當主揪、不看臉盲配、無外貌焦慮。以「活動」與「動機」為核心，撮合時間地點完全相符的校園夥伴。
+          </p>
+
+          <div class="action-zone">
+            {
+              showQr && qrSvg && (
+                <div class="qr-block">
+                  <div class="qr-code-wrapper" set:html={qrSvg} />
+                  <div class="qr-info">
+                    <span class="qr-label">掃描 QR Code</span>
+                    <span class="qr-sub">前往下載專頁</span>
+                    <span class="qr-domain">dare2jo.jjmowlab.com</span>
+                  </div>
+                </div>
+              )
+            }
+
+            <div class="store-buttons">
+              <div class="btn-group">
+                <a
+                  href={siteConfig.downloads.iosAppStoreUrl || '/download'}
+                  class:list={[
+                    'btn store-btn',
+                    siteConfig.downloads.iosAppStoreUrl ? 'btn-primary' : 'btn-disabled',
+                  ]}
+                  aria-label="App Store 下載"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.06 1.71-.93 2.73 1 .08 2.02-.48 2.63-1.23z" />
+                  </svg>
+                  <div class="store-btn-text">
+                    <span class="store-small">iOS App Store</span>
+                    <span class="store-status">{siteConfig.downloads.iosAppStoreUrl ? '免費下載' : '即將推出'}</span>
+                  </div>
+                </a>
+
+                <a
+                  href={siteConfig.downloads.googlePlayUrl || '/download'}
+                  class:list={[
+                    'btn store-btn',
+                    siteConfig.downloads.googlePlayUrl ? 'btn-primary' : 'btn-disabled',
+                  ]}
+                  aria-label="Google Play 下載"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.609 1.814L13.793 12 3.61 22.186c-.328-.31-.53-.787-.53-1.365V3.18c0-.578.202-1.055.53-1.365zm11.398 11.399l2.428-2.428-11.83-6.83 9.402 9.258zm2.428-4.428l2.977 1.719c.854.493.854 1.3 0 1.793l-2.977 1.719-2.148-2.148 2.148-3.083zm-3.641 1.719l-9.402 9.258 11.83-6.83-2.428-2.428z" />
+                  </svg>
+                  <div class="store-btn-text">
+                    <span class="store-small">Google Play</span>
+                    <span class="store-status">{siteConfig.downloads.googlePlayUrl ? '免費下載' : '即將推出'}</span>
+                  </div>
+                </a>
+              </div>
+
+              <p class="release-note">
+                目前正處於校園封測階段。通用連結將在雙校商店正式發布時即刻啟用。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Board Bottom Banner / Sticker Showcase -->
+    <div class="board-footer">
+      <div class="board-footer-item">
+        <span class="check-icon">✓</span>
+        <span>動機對齊・時間相同直接成行</span>
+      </div>
+      <div class="board-footer-item">
+        <span class="check-icon">✓</span>
+        <span>不看臉盲配・專注一起做的事</span>
+      </div>
+      <div class="board-footer-item">
+        <span class="check-icon">✓</span>
+        <span>小團體雙向確認・活動更安心</span>
+      </div>
+      <div class="board-footer-mascot-accent">
+        <img
+          src={assets.stickers.peaceSignFriends.src}
+          alt={assets.stickers.peaceSignFriends.alt}
+          width="44"
+          height="44"
+          loading="lazy"
+        />
+        <span>一起比 YA 成局！</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .mascot-board {
+    width: 100%;
+    background-color: var(--color-surface-lowest);
+    border: 2px solid var(--color-outline-variant);
+    border-radius: var(--radius-glass);
+    box-shadow: var(--shadow-float);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .board-inner {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .board-inner {
+      padding: var(--space-2xl) var(--space-xl);
+    }
+  }
+
+  .board-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px dashed var(--color-outline-variant);
+    margin-bottom: var(--space-xl);
+  }
+
+  .board-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-primary-container);
+    color: var(--color-primary-on-container);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .pin-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+  }
+
+  .campus-pills {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .pill-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-outline-variant);
+    background-color: var(--color-surface);
+  }
+
+  .pill-tag.nycu {
+    color: var(--color-primary);
+  }
+
+  .pill-tag.nthu {
+    color: var(--color-secondary);
+  }
+
+  .board-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .board-grid {
+      grid-template-columns: 1fr 1.25fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  .mascot-col {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mascot-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 1122 / 1402;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 60%, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+  }
+
+  .mascot-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 24px rgba(22, 27, 24, 0.08));
+  }
+
+  .sticker-floater {
+    position: absolute;
+    background: var(--color-surface-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-md);
+    padding: 6px;
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition-fast);
+  }
+
+  .sticker-floater:hover {
+    transform: scale(1.08) rotate(3deg);
+  }
+
+  .sticker-1 {
+    top: 10%;
+    left: -5%;
+    transform: rotate(-6deg);
+  }
+
+  .sticker-2 {
+    bottom: 25%;
+    left: -8%;
+    transform: rotate(5deg);
+  }
+
+  .sticker-3 {
+    top: 18%;
+    right: -5%;
+    transform: rotate(8deg);
+  }
+
+  @media (max-width: 640px) {
+    .sticker-floater {
+      transform: scale(0.85);
+    }
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: var(--space-md);
+  }
+
+  .activity-chip {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-outline-variant);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+  .board-heading {
+    font-size: 1.85rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .board-heading {
+      font-size: 2.25rem;
+    }
+  }
+
+  .board-heading .highlight {
+    color: var(--color-primary);
+  }
+
+  .board-lead {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+  }
+
+  .action-zone {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 640px) {
+    .action-zone {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .qr-block {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .qr-code-wrapper {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    background: #ffffff;
+    padding: 4px;
+    border-radius: var(--radius-sm);
+  }
+
+  .qr-code-wrapper :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .qr-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .qr-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .qr-sub {
+    font-size: 0.8rem;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .qr-domain {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-subtle);
+    margin-top: 2px;
+  }
+
+  .store-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    flex: 1;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .store-btn {
+    flex: 1;
+    min-width: 140px;
+    padding: 8px 16px;
+    justify-content: flex-start;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-outline);
+    background-color: var(--color-surface-lowest);
+    color: var(--color-text-main);
+  }
+
+  .store-btn-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    line-height: 1.15;
+  }
+
+  .store-small {
+    font-size: 0.72rem;
+    color: var(--color-text-subtle);
+    font-weight: 500;
+  }
+
+  .store-status {
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+
+  .release-note {
+    font-size: 0.78rem;
+    color: var(--color-text-subtle);
+    line-height: 1.4;
+    margin-top: 4px;
+  }
+
+  .board-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px dashed var(--color-outline-variant);
+  }
+
+  .board-footer-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .check-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--color-primary-container);
+    color: var(--color-primary-on-container);
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+
+  .board-footer-mascot-accent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+</style>

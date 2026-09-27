@@ -1,0 +1,289 @@
+---
+import { assets } from '../config/assets';
+import { siteConfig } from '../config/site';
+import { generateQrSvg } from '../utils/qrcode';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  showCompanionMascot?: boolean;
+}
+
+const {
+  title = '立即取得 敢不敢揪 App',
+  subtitle = '用手機相機掃描 QR Code，或直接前往雙校專屬下載管道',
+  showCompanionMascot = true,
+} = Astro.props;
+
+const downloadUrl = `${siteConfig.canonicalUrl}${siteConfig.downloads.universalDownloadPath}`;
+const qrSvg = await generateQrSvg(downloadUrl, {
+  margin: 1,
+  color: {
+    dark: '#059669',
+    light: '#ffffff',
+  },
+});
+---
+
+<div class="download-card notice-card">
+  <div class="download-card-inner">
+    <div class="card-info">
+      <div class="brand-row">
+        <img
+          src={assets.appIcon.src}
+          alt={assets.appIcon.alt}
+          width="56"
+          height="56"
+          class="download-icon"
+        />
+        <div>
+          <h3 class="download-brand-name">{siteConfig.siteName}</h3>
+          <p class="download-slogan">{siteConfig.tagline}</p>
+        </div>
+      </div>
+
+      <h4 class="download-title">{title}</h4>
+      <p class="download-subtitle">{subtitle}</p>
+
+      <!-- Store Buttons -->
+      <div class="store-links">
+        <a
+          href={siteConfig.downloads.iosAppStoreUrl || '#'}
+          class:list={[
+            'btn store-button ios-button',
+            siteConfig.downloads.iosAppStoreUrl ? 'btn-primary' : 'btn-disabled',
+          ]}
+          aria-label="下載 iOS App"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.06 1.71-.93 2.73 1 .08 2.02-.48 2.63-1.23z" />
+          </svg>
+          <div class="store-btn-labels">
+            <span class="store-platform">Apple App Store</span>
+            <span class="store-badge-status">{siteConfig.downloads.iosAppStoreUrl ? '免費下載' : '即將推出'}</span>
+          </div>
+        </a>
+
+        <a
+          href={siteConfig.downloads.googlePlayUrl || '#'}
+          class:list={[
+            'btn store-button android-button',
+            siteConfig.downloads.googlePlayUrl ? 'btn-primary' : 'btn-disabled',
+          ]}
+          aria-label="下載 Android App"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3.609 1.814L13.793 12 3.61 22.186c-.328-.31-.53-.787-.53-1.365V3.18c0-.578.202-1.055.53-1.365zm11.398 11.399l2.428-2.428-11.83-6.83 9.402 9.258zm2.428-4.428l2.977 1.719c.854.493.854 1.3 0 1.793l-2.977 1.719-2.148-2.148 2.148-3.083zm-3.641 1.719l-9.402 9.258 11.83-6.83-2.428-2.428z" />
+          </svg>
+          <div class="store-btn-labels">
+            <span class="store-platform">Google Play</span>
+            <span class="store-badge-status">{siteConfig.downloads.googlePlayUrl ? '免費下載' : '即將推出'}</span>
+          </div>
+        </a>
+      </div>
+
+      <p class="store-note">
+        目前為陽明交大與清華大學封測驗證階段，僅限持 @nycu.edu.tw 或 @nthu.edu.tw 學生信箱註冊。
+      </p>
+    </div>
+
+    <!-- QR Section (Prominent on desktop) -->
+    <div class="card-qr">
+      <div class="qr-display">
+        <div class="qr-frame" set:html={qrSvg} />
+        <span class="qr-hint">手機掃描前往下載頁</span>
+        <code class="qr-url-text">{downloadUrl}</code>
+      </div>
+
+      {
+        showCompanionMascot && (
+          <div class="companion-mascot">
+            <img
+              src={assets.mascot.giantThumbsUp.src}
+              alt={assets.mascot.giantThumbsUp.alt}
+              width="140"
+              height="220"
+              loading="lazy"
+              class="companion-img"
+            />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .download-card {
+    background-color: var(--color-surface-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-card);
+  }
+
+  .download-card-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 840px) {
+    .download-card-inner {
+      grid-template-columns: 1.3fr 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .download-icon {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .download-brand-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+  }
+
+  .download-slogan {
+    font-size: 0.88rem;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .download-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-xs);
+  }
+
+  .download-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .store-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  @media (min-width: 480px) {
+    .store-links {
+      flex-direction: row;
+    }
+  }
+
+  .store-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-outline);
+    background-color: var(--color-surface);
+    color: var(--color-text-main);
+    transition: all var(--transition-fast);
+  }
+
+  .store-btn-labels {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+  }
+
+  .store-platform {
+    font-size: 0.75rem;
+    color: var(--color-text-subtle);
+  }
+
+  .store-badge-status {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .store-note {
+    font-size: 0.8rem;
+    color: var(--color-text-subtle);
+    line-height: 1.45;
+  }
+
+  .card-qr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    background-color: var(--color-surface-card);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-outline-variant);
+  }
+
+  .qr-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .qr-frame {
+    width: 140px;
+    height: 140px;
+    background: #ffffff;
+    border-radius: var(--radius-sm);
+    padding: 8px;
+    box-shadow: var(--shadow-subtle);
+    margin-bottom: var(--space-sm);
+  }
+
+  .qr-frame :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .qr-hint {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: 2px;
+  }
+
+  .qr-url-text {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-subtle);
+  }
+
+  .companion-mascot {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .companion-mascot {
+      display: block;
+      flex-shrink: 0;
+    }
+  }
+
+  .companion-img {
+    height: 160px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+  }
+</style>

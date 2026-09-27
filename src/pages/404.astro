@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { assets } from '../config/assets';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout
+  title={`找不到頁面 (404) | ${siteConfig.siteName}`}
+  description="找不到您所請求的頁面，請返回敢不敢揪官方首頁。"
+>
+  <div class="notfound-page">
+    <div class="container notfound-container">
+      <div class="notfound-card notice-card">
+        <div class="notfound-mascot">
+          <img
+            src={assets.stickers.lostMap.src}
+            alt={assets.stickers.lostMap.alt}
+            width="180"
+            height="240"
+            class="mascot-lost"
+          />
+        </div>
+
+        <div class="notfound-text">
+          <span class="badge badge-amber">404 NOT FOUND</span>
+          <h1 class="notfound-title">看著校園地圖迷路了？</h1>
+          <p class="notfound-desc">
+            你尋找的頁面可能已經更換網址、被移除，或者暫時在校園某個角落走丟了。
+          </p>
+
+          <div class="notfound-actions">
+            <a href="/" class="btn btn-primary">
+              返回首頁
+            </a>
+            <a href="/download" class="btn btn-secondary">
+              下載 App
+            </a>
+            <a href="/support" class="btn btn-secondary">
+              支援中心
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .notfound-page {
+    padding: var(--space-3xl) 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-surface);
+  }
+
+  .notfound-container {
+    max-width: 680px;
+  }
+
+  .notfound-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-3xl) var(--space-xl);
+    gap: var(--space-xl);
+  }
+
+  .mascot-lost {
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+  }
+
+  .notfound-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .notfound-desc {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 440px;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .notfound-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+</style>

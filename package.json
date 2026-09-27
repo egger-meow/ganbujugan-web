@@ -1,0 +1,36 @@
+{
+  "name": "ganbujugan-web",
+  "version": "1.0.0",
+  "description": "敢不敢揪 官方網站 | 找到現在也想一起的人",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "astro check",
+    "test": "node tests/site.test.mjs",
+    "deploy": "astro build && wrangler deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egger-meow/ganbujugan-web.git"
+  },
+  "keywords": [
+    "dare2jo",
+    "敢不敢揪",
+    "NYCU",
+    "NTHU",
+    "activity-matching",
+    "campus"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/sitemap": "^3.7.4",
+    "@types/qrcode": "^1.5.6",
+    "astro": "^7.3.5",
+    "qrcode": "^1.5.4",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.141.0"
+  }
+}

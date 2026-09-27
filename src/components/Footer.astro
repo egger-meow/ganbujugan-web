@@ -1,0 +1,242 @@
+---
+import { assets } from '../config/assets';
+import { siteConfig } from '../config/site';
+---
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <img
+          src={assets.appIcon.src}
+          alt={assets.appIcon.alt}
+          width="48"
+          height="48"
+          class="footer-icon"
+        />
+        <div>
+          <span class="footer-title">{siteConfig.siteName}</span>
+          <p class="footer-tagline">{siteConfig.tagline}</p>
+        </div>
+      </div>
+      <p class="footer-desc">
+        {siteConfig.mission}
+      </p>
+      <div class="footer-campus-badges">
+        <span class="badge badge-emerald">陽明交大 NYCU</span>
+        <span class="badge badge-sky">清華大學 NTHU</span>
+      </div>
+    </div>
+
+    <div class="footer-nav-col">
+      <span class="footer-col-title">平台導覽</span>
+      <ul class="footer-links">
+        <li><a href="/#how-it-works">怎麼玩</a></li>
+        <li><a href="/#activities">支援活動類型</a></li>
+        <li><a href="/#safety">安全與信任機制</a></li>
+        <li><a href="/#faq">常見問答</a></li>
+        <li><a href="/download">取得 App</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-nav-col">
+      <span class="footer-col-title">條款與隱私</span>
+      <ul class="footer-links">
+        <li><a href="/terms">服務條款</a></li>
+        <li><a href="/privacy">隱私權政策</a></li>
+        <li><a href="/account-deletion">帳號刪除說明</a></li>
+        <li><a href="/support">支援與回報中心</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-notice-col">
+      <span class="footer-col-title">校園身份驗證說明</span>
+      <p class="footer-eligibility-note">
+        本服務目前僅開放持有 <strong>@nycu.edu.tw</strong> 或 <strong>@nthu.edu.tw</strong> 學校信箱之在校成員註冊使用，信箱僅供校籍判定與驗證碼寄送，不具非學校官方背書之意涵。
+      </p>
+      <div class="footer-meta">
+        <a
+          href={siteConfig.contact.githubRepoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="repo-link"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+            ></path>
+          </svg>
+          <span>find-people-now 專案源碼</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p class="copyright">
+        &copy; {new Date().getFullYear()} 敢不敢揪 (Dare2Jo). 找到現在也想一起的人。
+      </p>
+      <p class="build-info">
+        Production Domain: <code>dare2jo.jjmowlab.com</code>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-surface-card);
+    border-top: 1px solid var(--color-outline-variant);
+    margin-top: auto;
+    padding-top: var(--space-3xl);
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+  }
+
+  @media (min-width: 640px) {
+    .footer-content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .footer-content {
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-icon {
+    border-radius: var(--radius-sm);
+  }
+
+  .footer-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .footer-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+    max-width: 320px;
+  }
+
+  .footer-campus-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .footer-col-title {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-links a {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links a:hover {
+    color: var(--color-primary);
+  }
+
+  .footer-eligibility-note {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-meta {
+    margin-top: var(--space-sm);
+  }
+
+  .repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+    border: 1px solid var(--color-outline-variant);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-surface);
+  }
+
+  .repo-link:hover {
+    color: var(--color-primary);
+    border-color: var(--color-outline);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-outline-variant);
+    padding: var(--space-lg) 0;
+    background-color: var(--color-surface);
+  }
+
+  .footer-bottom-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    font-size: 0.82rem;
+    color: var(--color-text-subtle);
+  }
+
+  @media (min-width: 640px) {
+    .footer-bottom-inner {
+      flex-direction: row;
+    }
+  }
+
+  .build-info code {
+    background-color: var(--color-surface-container-high);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+  }
+</style>

@@ -1,0 +1,1369 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MascotBoard from '../components/MascotBoard.astro';
+import QrCodeCard from '../components/QrCodeCard.astro';
+import { assets } from '../config/assets';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-badge-wrap">
+          <span class="badge badge-emerald">NYCU &times; NTHU 校園即時配對</span>
+          <span class="badge badge-sky">雙校限定</span>
+        </div>
+
+        <h1 class="hero-headline">
+          <span class="brand-name">{siteConfig.siteName}</span>
+          <span class="sub-headline">{siteConfig.tagline}</span>
+        </h1>
+
+        <p class="hero-summary">
+          {siteConfig.description}
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="/download" class="btn btn-primary btn-lg">
+            <span>取得 App（即將推出）</span>
+            <span class="cta-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a href="#how-it-works" class="btn btn-secondary btn-lg">
+            <span>看看怎麼玩</span>
+          </a>
+        </div>
+
+        <div class="hero-trust-row">
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            <span>學校信箱雙重驗證</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            <span>盲配不看臉</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            <span>免當主揪寫長文</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-mascot-card">
+          <img
+            src={assets.mascot.heroPointing.src}
+            alt={assets.mascot.heroPointing.alt}
+            width={assets.mascot.heroPointing.width}
+            height={assets.mascot.heroPointing.height}
+            loading="eager"
+            fetchpriority="high"
+            class="hero-mascot-img"
+          />
+
+          <!-- Floating Mascot Micro-Badges -->
+          <div class="hero-float-badge float-top-right">
+            <span class="float-emoji">🏀</span>
+            <span class="float-text">球場少一人？</span>
+          </div>
+
+          <div class="hero-float-badge float-bottom-left">
+            <span class="float-emoji">📖</span>
+            <span class="float-text">浩然自習中</span>
+          </div>
+
+          <div class="hero-float-badge float-bottom-right">
+            <span class="float-emoji">🍜</span>
+            <span class="float-text">宵夜吃點？</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Why This Exists (三大模式對比) -->
+  <section class="section section-why" id="why-this-exists">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-neutral">校園社交新解法</span>
+        <h2 class="section-title">為什麼我們做「敢不敢揪」？</h2>
+        <p class="section-subtitle">
+          讓原本可能不會發生的那場球、讀書、吃飯，真的發生。
+        </p>
+      </div>
+
+      <div class="comparison-grid">
+        <!-- Card 1: Dating Apps -->
+        <div class="comp-card notice-card negative">
+          <div class="comp-badge">傳統交友軟體</div>
+          <div class="comp-icon">👤</div>
+          <h3>看臉滑卡片，充滿外貌焦慮</h3>
+          <p>
+            以個人照片與條件為導向，左滑右滑耗費時間，聊天不知從何開頭，真實見面機率極低。
+          </p>
+          <ul class="comp-points">
+            <li>&#10005; 外貌與標籤篩選</li>
+            <li>&#10005; 無止境的尬聊查戶口</li>
+            <li>&#10005; 目的各異、難以成局</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: FB/Dcard Board -->
+        <div class="comp-card notice-card negative">
+          <div class="comp-badge">社團發文 / Dcard 揪團</div>
+          <div class="comp-icon">📝</div>
+          <h3>主揪累死，推文湊不齊流局</h3>
+          <p>
+            發起人要排版寫長文、統計推文私訊、協調每個人時間地點，最後往往因一人臨時不來直接解散。
+          </p>
+          <ul class="comp-points">
+            <li>&#10005; 主揪一人承擔所有溝通成本</li>
+            <li>&#10005; 時間地點改來改去難對齊</li>
+            <li>&#10005; 棄單棄約無法問責</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: Dare2Jo (敢不敢揪) -->
+        <div class="comp-card notice-card positive">
+          <div class="comp-badge badge-emerald">敢不敢揪</div>
+          <div class="comp-icon">⚡</div>
+          <h3>動機對齊盲配，湊齊直接出發</h3>
+          <p>
+            沒有人需要當苦命主揪。選擇你想做的事、時間與校區，系統撮合剛好也想出發的人，滿人即成局！
+          </p>
+          <ul class="comp-points">
+            <li>✓ 活動與時間優先，不看臉不挑人</li>
+            <li>✓ 系統自動即時撮合，免去推文等待</li>
+            <li>✓ 全員線上投票地點，現場一鍵報到</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Core Concept: Want → Match → Happen -->
+  <section class="section section-concept">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-emerald">{siteConfig.concept}</span>
+        <h2 class="section-title">三部曲：動機到出發，就這麼簡單</h2>
+        <p class="section-subtitle">
+          從一個隨興的念頭，到現場開打、開吃、自習，只需三步。
+        </p>
+      </div>
+
+      <div class="concept-timeline">
+        <!-- Step 1: Want -->
+        <div class="concept-card notice-card">
+          <div class="concept-header">
+            <span class="concept-step-badge">Phase 1</span>
+            <span class="concept-tag">WANT 想出發</span>
+          </div>
+          <div class="concept-media">
+            <img
+              src={assets.productStates.emptyState.src}
+              alt={assets.productStates.emptyState.alt}
+              width="280"
+              height="280"
+              loading="lazy"
+              class="concept-img"
+            />
+          </div>
+          <h3>送出你想做的事</h3>
+          <p>
+            下課想去打球？期末想找人坐在對面安靜自習？30 秒選擇活動類型、時間範圍與人數預期。沒有人發起，你就當第一個！
+          </p>
+        </div>
+
+        <!-- Step 2: Match -->
+        <div class="concept-card notice-card">
+          <div class="concept-header">
+            <span class="concept-step-badge">Phase 2</span>
+            <span class="concept-tag">MATCH 智慧撮合</span>
+          </div>
+          <div class="concept-media">
+            <img
+              src={assets.productStates.matchingInProgress.src}
+              alt={assets.productStates.matchingInProgress.alt}
+              width="280"
+              height="280"
+              loading="lazy"
+              class="concept-img"
+            />
+          </div>
+          <h3>動機完全對齊時成行</h3>
+          <p>
+            系統背景比對「活動、時段重疊、校區、人數」。不看臉、不滑卡片。小人數活動具備雙向確認卡，安心無壓力。
+          </p>
+        </div>
+
+        <!-- Step 3: Happen -->
+        <div class="concept-card notice-card highlight-card">
+          <div class="concept-header">
+            <span class="concept-step-badge">Phase 3</span>
+            <span class="concept-tag">HAPPEN 真正發生</span>
+          </div>
+          <div class="concept-media">
+            <img
+              src={assets.productStates.matchSuccess.src}
+              alt={assets.productStates.matchSuccess.alt}
+              width="280"
+              height="280"
+              loading="lazy"
+              class="concept-img"
+            />
+          </div>
+          <h3>投票地點，碰頭享受當下</h3>
+          <p>
+            成局後全員投票決定集合地點，填寫見面提示。到達現場點擊「我到了」，讓原本不會發生的那場活動真正發生！
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: 怎麼玩 (Tutorial Steps with 6 Real Images) -->
+  <section class="section section-tutorial" id="how-it-works">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-emerald">完整體驗流程</span>
+        <h2 class="section-title">怎麼玩「敢不敢揪」？</h2>
+        <p class="section-subtitle">
+          六個完整環節，看懂這款專為交大與清大學生設計的即時生活圈 App。
+        </p>
+      </div>
+
+      <div class="tutorial-grid">
+        {
+          assets.tutorial.map((step) => (
+            <div class="tutorial-card notice-card">
+              <div class="tutorial-card-top">
+                <div class="step-pill">
+                  <span class="step-num-circle">{step.step}</span>
+                  <span class="step-short-title">{step.shortTitle}</span>
+                </div>
+                <div class="step-highlight-badge">{step.highlightText}</div>
+              </div>
+
+              <div class="tutorial-img-wrap">
+                <img
+                  src={step.image.src}
+                  alt={step.image.alt}
+                  width={step.image.width}
+                  height={step.image.height}
+                  loading="lazy"
+                  class="tutorial-img"
+                />
+              </div>
+
+              <div class="tutorial-card-body">
+                <h3 class="tutorial-card-title">{step.title}</h3>
+                <p class="tutorial-card-desc">{step.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Activity Universe (Data-Driven from Repo) -->
+  <section class="section section-activities" id="activities">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-sky">真實支援活動庫</span>
+        <h2 class="section-title">今天想揪什麼？</h2>
+        <p class="section-subtitle">
+          涵蓋運動、自習、聚餐到隨性聚會，全部依校園真實需求設定專屬撮合規則。
+        </p>
+      </div>
+
+      <div class="activity-grid">
+        {
+          siteConfig.activities.map((act) => (
+            <div class="activity-card notice-card">
+              <div class="activity-card-header">
+                <span class="act-emoji">{act.iconEmoji}</span>
+                <div class="act-title-box">
+                  <h3 class="act-name">{act.name}</h3>
+                  <span class="act-category">{act.category}</span>
+                </div>
+              </div>
+
+              <p class="act-desc">{act.description}</p>
+
+              <div class="act-meta">
+                <span class="meta-tag">
+                  <strong>人數：</strong>
+                  {act.minParticipants} ~ {act.maxParticipants} 人
+                  {act.groupStep ? ` (${act.groupStep}人步階)` : ''}
+                </span>
+                <span class="meta-tag">
+                  <strong>時長：</strong>約 {act.defaultDuration} 分鐘
+                </span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="activity-custom-banner notice-card">
+        <div class="custom-banner-text">
+          <h3>想揪的活動不在清單上？</h3>
+          <p>
+            App 內支援「提案新活動類型 (<code>propose_activity_type</code>)」，經管理審核通過後，將即刻開放給全校同學發起！
+          </p>
+        </div>
+        <div class="custom-banner-action">
+          <a href="/download" class="btn btn-primary btn-pill">
+            註冊發起你的局 &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: 不是交友軟體 (Focus on Doing Things Together) -->
+  <section class="section section-not-dating">
+    <div class="container">
+      <div class="not-dating-box notice-card">
+        <div class="not-dating-content">
+          <div class="badge badge-emerald" style="margin-bottom: var(--space-md);">核心哲學</div>
+          <h2 class="not-dating-title">我們不是交友軟體。</h2>
+          <p class="not-dating-lead">
+            交友軟體讓人焦慮，而「敢不敢揪」讓你真的走出宿舍做你想做的事。
+          </p>
+
+          <div class="philosophy-points">
+            <div class="point-item">
+              <div class="point-bullet">01</div>
+              <div>
+                <strong>活動優先 (Activity-First)</strong>
+                <p>我們在乎的是「那場球能不能打成、那堂課有沒有人起自習」，而不是「今天遇到了誰」。</p>
+              </div>
+            </div>
+
+            <div class="point-item">
+              <div class="point-bullet">02</div>
+              <div>
+                <strong>動機對齊盲配 (Intent-to-Intent)</strong>
+                <p>配對前完全看不到外貌與個人背景，沒有挑選與被挑選的自尊壓力，拒絕容貌焦慮。</p>
+              </div>
+            </div>
+
+            <div class="point-item">
+              <div class="point-bullet">03</div>
+              <div>
+                <strong>性別不作篩選條件</strong>
+                <p>這不是聯誼配對。系統不提供性別篩選，保持純粹一起做事的健康氛圍。</p>
+              </div>
+            </div>
+
+            <div class="point-item">
+              <div class="point-bullet">04</div>
+              <div>
+                <strong>不設站內私訊聊天</strong>
+                <p>配對成功後直接鎖定集合地點碰面，活動當下才交換聯絡方式，省去漫長的尷尬傳訊。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="not-dating-visual">
+          <img
+            src={assets.stickers.coolSunglasses.src}
+            alt={assets.stickers.coolSunglasses.alt}
+            width="220"
+            height="240"
+            loading="lazy"
+            class="cool-mascot"
+          />
+          <div class="mascot-quote-bubble">
+            「專注在想做的事上，<br />自然就會遇到合拍的夥伴！」
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Safety & Trust (Real Verified Mechanisms) -->
+  <section class="section section-safety" id="safety">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-emerald">安全與誠信設計</span>
+        <h2 class="section-title">校園真實信任體系</h2>
+        <p class="section-subtitle">
+          不誇大零風險保證，只用實事求是的機制建立健康的活動體驗。
+        </p>
+      </div>
+
+      <div class="safety-grid">
+        <div class="safety-card notice-card">
+          <div class="safety-icon-header">
+            <span class="safety-icon">🎓</span>
+            <h3>雙校官方信箱驗證</h3>
+          </div>
+          <p>
+            僅限 <code>@nycu.edu.tw</code> 與 <code>@nthu.edu.tw</code> 信箱註冊。信箱網域自動判定學校，無法自選偽造，確保成員具備真實校園背景。
+          </p>
+        </div>
+
+        <div class="safety-card notice-card">
+          <div class="safety-icon-header">
+            <span class="safety-icon">🛡️</span>
+            <h3>小人數雙向確認機制</h3>
+          </div>
+          <p>
+            在 1~2 人低人數活動中，系統進入 <code>PENDING_CONFIRMATION</code> 狀態。提供安全資訊卡（含科系、學制與信用等級），雙方在 10 分鐘內對稱同意才成行，任一方猶豫則無痛解散。
+          </p>
+        </div>
+
+        <div class="safety-card notice-card">
+          <div class="safety-icon-header">
+            <span class="safety-icon">📍</span>
+            <h3>公開地點投票與見面提示</h3>
+          </div>
+          <p>
+            成局後全員線上投票決定精確活動地點，並能留下「見面提示（如：穿黑長褲、戴棒球帽）」，現場相認自然不尷尬。
+          </p>
+        </div>
+
+        <div class="safety-card notice-card">
+          <div class="safety-icon-header">
+            <span class="safety-icon">⭐</span>
+            <h3>出席回報與可信度結算</h3>
+          </div>
+          <p>
+            活動後成員互評出席紀錄，計算可信度等級（Trusted / Normal / New）。惡意未出席者將受到信用扣減與系統自動暫時停權處分。
+          </p>
+        </div>
+
+        <div class="safety-card notice-card">
+          <div class="safety-icon-header">
+            <span class="safety-icon">🚫</span>
+            <h3>單向即時封鎖與檢舉</h3>
+          </div>
+          <p>
+            活動中遇到任何不舒服的言行，可立即單向封鎖。對方不會收到通知，未來配對引擎將永久避免將你們排在同一場活動。
+          </p>
+        </div>
+
+        <div class="safety-card notice-card">
+          <div class="safety-icon-header">
+            <span class="safety-icon">🔒</span>
+            <h3>自主去識別化帳號刪除</h3>
+          </div>
+          <p>
+            App 內設定提供一鍵刪除帳號，立即清空信箱、頭像、姓名與所有通訊方式，不留識別個資。詳細機制請參閱專屬說明頁面。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Mascot Board (Prominent Brand Notice-Board) -->
+  <section class="section section-mascot-board">
+    <div class="container">
+      <MascotBoard variant="poster" showQr={true} />
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="section section-faq" id="faq">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-neutral">解開所有疑問</span>
+        <h2 class="section-title">常見問答 (FAQ)</h2>
+        <p class="section-subtitle">
+          關於學校、配對規則、安全隱私與帳號操作的快速指南。
+        </p>
+      </div>
+
+      <div class="faq-container">
+        <details class="faq-accordion" open>
+          <summary>
+            <span>哪些學校與校區可以使用？</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              目前專門開放給<strong>國立陽明交通大學 (NYCU)</strong> 與 <strong>國立清華大學 (NTHU)</strong> 的在校成員。
+            </p>
+            <p>
+              校區範圍涵蓋 NYCU（光復校區、博愛校區、六家校區、陽明校區、北門校區、台南校區）與 NTHU（校本部/光復校區、南大校區）。發起活動時會以校區為範圍進行鄰近撮合。
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-accordion">
+          <summary>
+            <span>系統是怎麼進行配對的？</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              配對引擎採 N 方累積貪婪撮合演算法：當兩筆或多筆 Match Request 的「活動類型相同、所屬學校與校區相同、時間範圍存在共同交集、且人數區間相容」時，系統即自動合併撮合。累積達到該活動類型之最低門檻即刻成局！
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-accordion">
+          <summary>
+            <span>這真的是交友軟體嗎？</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              不是。敢不敢揪是<strong>活動導向 (Activity-First)</strong> 的工具。我們沒有個人檔案列表供你滑卡片、沒有外貌篩選、不支援按性別過濾，更不設有站內聊天室。我們的唯一目的就是撮合現在也想做同一件事的同學，出發到現場碰面完成活動。
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-accordion">
+          <summary>
+            <span>配對前我會看到其他人的照片或資料嗎？</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              完全不會。配對成立前採全面「盲配」機制。在 1~2 人活動進入雙向確認時，僅能看到去識別化的「安全卡」（包含科系、學制與可信度等級，不含相片與姓名）。只有在活動正式成立後，彼此的頭像與稱呼才會揭示，以利現場相認。
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-accordion">
+          <summary>
+            <span>成局後如何與其他成員聯絡？</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              配對成立後，活動詳情頁將限時解鎖每位成員登記的外部聯絡方式（LINE ID、Instagram 或 Discord）。成員亦可直接在活動頁面使用「投票地點」、「集合特徵提示」與「我到了」功能在現場碰面。
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-accordion">
+          <summary>
+            <span>為什麼一定要用學校信箱註冊？</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              學校信箱（@nycu.edu.tw / @nthu.edu.tw）是確保校園成員純淨性與基本信任度的最有效防護網。免去繁複的身分證件上傳，僅透過信箱一次性驗證碼即可快速登入。
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-accordion">
+          <summary>
+            <span>可以交大跟清大跨校配對嗎？</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              目前 MVP 階段配對池以學校為嚴格隔離範圍（交大配交大、清大配清大）。雙校跨校配對已保留在未來規劃中，將於後續版本評估開放。
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-accordion">
+          <summary>
+            <span>如果我想刪除帳號，該怎麼做？</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              隨時可於 App 內點選「個人檔案 &rarr; 刪除帳號」，系統將在後端單一事務內立即清空你的信箱、姓名、頭像與所有通訊方式，完成完全去識別化。更多細節可查閱我們的 <a href="/account-deletion">帳號刪除說明頁面</a>。
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: Final Download Board -->
+  <section class="section section-final-download">
+    <div class="container">
+      <QrCodeCard
+        title="找到現在也想一起的人"
+        subtitle="拿起手機相機對準下方 QR Code，或立即儲存下載頁面"
+        showCompanionMascot={true}
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero-section {
+    padding: var(--space-3xl) 0 var(--space-2xl);
+    background: radial-gradient(
+      circle at 80% 20%,
+      rgba(16, 185, 129, 0.12) 0%,
+      transparent 55%
+    );
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero-container {
+      grid-template-columns: 1.15fr 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  .hero-badge-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-headline {
+    margin-bottom: var(--space-md);
+    line-height: 1.2;
+  }
+
+  .brand-name {
+    display: block;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 640px) {
+    .brand-name {
+      font-size: 3.8rem;
+    }
+  }
+
+  .sub-headline {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-top: 4px;
+  }
+
+  @media (min-width: 640px) {
+    .sub-headline {
+      font-size: 2.3rem;
+    }
+  }
+
+  .hero-summary {
+    font-size: 1.12rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+    max-width: 540px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .btn-lg {
+    padding: 14px 28px;
+    font-size: 1.05rem;
+  }
+
+  .cta-arrow {
+    transition: transform var(--transition-fast);
+  }
+
+  .btn-primary:hover .cta-arrow {
+    transform: translateX(4px);
+  }
+
+  .hero-trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-outline-variant);
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+  }
+
+  .trust-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--color-primary-container);
+    color: var(--color-primary-on-container);
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-mascot-card {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1122 / 1402;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(
+      circle at 50% 55%,
+      rgba(16, 185, 129, 0.2) 0%,
+      transparent 70%
+    );
+  }
+
+  .hero-mascot-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 16px 32px rgba(22, 27, 24, 0.12));
+  }
+
+  .hero-float-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--color-surface-lowest);
+    border: 1px solid var(--color-outline);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+    box-shadow: var(--shadow-card);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .float-top-right {
+    top: 6%;
+    right: -2%;
+  }
+
+  .float-bottom-left {
+    bottom: 18%;
+    left: -4%;
+  }
+
+  .float-bottom-right {
+    bottom: 8%;
+    right: -2%;
+  }
+
+  /* Section Standard Styles */
+  .section {
+    padding: var(--space-3xl) 0;
+  }
+
+  .section-header {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-xs);
+  }
+
+  @media (min-width: 640px) {
+    .section-title {
+      font-size: 2.4rem;
+    }
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Section 2: Why This Exists Comparison */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 860px) {
+    .comparison-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .comp-card {
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .comp-card.positive {
+    border: 2px solid var(--color-primary);
+    background-color: var(--color-surface-lowest);
+    box-shadow: 0 8px 24px rgba(5, 150, 105, 0.1);
+  }
+
+  .comp-badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-md);
+  }
+
+  .comp-icon {
+    font-size: 2.2rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .comp-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+  }
+
+  .comp-card p {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+  }
+
+  .comp-points {
+    margin-top: auto;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .comp-card.negative .comp-points li {
+    color: var(--color-text-subtle);
+  }
+
+  .comp-card.positive .comp-points li {
+    color: var(--color-primary);
+  }
+
+  /* Section 3: Concept Timeline */
+  .concept-timeline {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 840px) {
+    .concept-timeline {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .concept-card {
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .concept-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .concept-step-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+  }
+
+  .concept-tag {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .concept-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+    height: 200px;
+  }
+
+  .concept-img {
+    max-height: 190px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+  }
+
+  .concept-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: var(--space-xs);
+  }
+
+  .concept-card p {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* Section 4: 怎麼玩 Tutorial Grid */
+  .tutorial-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 640px) {
+    .tutorial-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .tutorial-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .tutorial-card {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-surface-lowest);
+  }
+
+  .tutorial-card-top {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: var(--space-md);
+  }
+
+  .step-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .step-num-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
+
+  .step-short-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .step-highlight-badge {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-primary-on-container);
+    background-color: var(--color-primary-container);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    width: fit-content;
+  }
+
+  .tutorial-img-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+    margin-bottom: var(--space-md);
+  }
+
+  .tutorial-img {
+    max-height: 210px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.06));
+  }
+
+  .tutorial-card-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-main);
+  }
+
+  .tutorial-card-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* Section 5: Activities Grid */
+  .activity-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (min-width: 480px) {
+    .activity-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .activity-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .activity-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .activity-card {
+    padding: var(--space-md);
+    background-color: var(--color-surface-lowest);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .activity-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .act-emoji {
+    font-size: 1.8rem;
+  }
+
+  .act-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .act-category {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .act-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+    flex-grow: 1;
+  }
+
+  .act-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-top: 1px dashed var(--color-outline-variant);
+    padding-top: var(--space-xs);
+    font-size: 0.78rem;
+    color: var(--color-text-subtle);
+  }
+
+  .activity-custom-banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, var(--color-surface-lowest) 0%, var(--color-surface-card) 100%);
+    border: 1px solid var(--color-outline);
+  }
+
+  @media (min-width: 720px) {
+    .activity-custom-banner {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .custom-banner-text h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .custom-banner-text p {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  /* Section 6: 不是交友軟體 */
+  .not-dating-box {
+    padding: var(--space-2xl);
+    background-color: var(--color-surface-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-lg);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 860px) {
+    .not-dating-box {
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  .not-dating-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-xs);
+  }
+
+  .not-dating-lead {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+  }
+
+  .philosophy-points {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 560px) {
+    .philosophy-points {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .point-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .point-bullet {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    background-color: var(--color-primary-container);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+  }
+
+  .point-item strong {
+    display: block;
+    font-size: 0.98rem;
+    color: var(--color-text-main);
+    margin-bottom: 2px;
+  }
+
+  .point-item p {
+    font-size: 0.86rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .not-dating-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cool-mascot {
+    object-fit: contain;
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.08));
+    margin-bottom: var(--space-sm);
+  }
+
+  .mascot-quote-bubble {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline);
+    border-radius: var(--radius-md);
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.4;
+    box-shadow: var(--shadow-subtle);
+  }
+
+  /* Section 7: Safety Grid */
+  .safety-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 640px) {
+    .safety-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .safety-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .safety-card {
+    padding: var(--space-xl);
+    background-color: var(--color-surface-lowest);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .safety-icon-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .safety-icon {
+    font-size: 1.8rem;
+  }
+
+  .safety-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .safety-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Section 9: FAQ Accordions */
+  .faq-container {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .faq-accordion {
+    background-color: var(--color-surface-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color var(--transition-fast);
+  }
+
+  .faq-accordion[open] {
+    border-color: var(--color-primary);
+  }
+
+  .faq-accordion summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+  }
+
+  .faq-accordion summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-icon {
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    transition: transform var(--transition-fast);
+  }
+
+  .faq-accordion[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-body {
+    padding: 0 var(--space-lg) var(--space-lg);
+  }
+
+  .faq-body p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin-bottom: var(--space-xs);
+  }
+
+  .faq-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Section 10: Final Download */
+  .section-final-download {
+    padding-bottom: var(--space-3xl);
+  }
+</style>
