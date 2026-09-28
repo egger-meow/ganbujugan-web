@@ -1,11 +1,10 @@
 name: Deploy to Cloudflare Workers
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
-  # To enable automatic deployment on push after configuring Cloudflare secrets in GitHub repository settings:
-  # push:
-  #   branches:
-  #     - main
 
 jobs:
   build-and-deploy:
@@ -26,6 +25,9 @@ jobs:
 
       - name: Type check
         run: npm run check
+
+      - name: Run automated tests
+        run: npm test
 
       - name: Build static site
         run: npm run build
