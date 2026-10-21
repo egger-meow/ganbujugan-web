@@ -59,7 +59,7 @@ const toc = [
   <section id="data-handling">
     <h2>二、個人資料清理與去識別化範圍</h2>
     <p>
-      當你在 App 內點擊確認刪除時，系統後端程序（<code>delete_account()</code> RPC）將在單一交易內立即執行下列清理作業：
+      當你在 App 內點擊確認刪除時，系統將立即執行下列資料清理作業：
     </p>
 
     <table>
@@ -73,7 +73,7 @@ const toc = [
       <tbody>
         <tr>
           <td>學校信箱 (Email)</td>
-          <td>以 <code>deleted+[UUID]</code> 系統佔位字串替換，解除原信箱綁定</td>
+          <td>移除原信箱並解除綁定，替換為無法識別個人的代稱</td>
           <td>永久去識別化</td>
         </tr>
         <tr>
@@ -82,17 +82,17 @@ const toc = [
           <td>永久去識別化</td>
         </tr>
         <tr>
-          <td>頭像照片 (Avatar URL)</td>
+          <td>頭像照片</td>
           <td>從儲存空間解除關聯並重置為空</td>
           <td>永久清除</td>
         </tr>
         <tr>
           <td>外部聯絡方式 (IG / LINE / Discord)</td>
-          <td>所有通訊帳號完全清空為 NULL</td>
+          <td>清除所有通訊帳號</td>
           <td>永久清除</td>
         </tr>
         <tr>
-          <td>個人簡介 (Bio) 與性別</td>
+          <td>個人簡介與性別</td>
           <td>清空為 NULL</td>
           <td>永久清除</td>
         </tr>
@@ -146,7 +146,7 @@ const toc = [
       <h3 style="color: var(--color-primary); margin-top: 0;">刪除後的帳號狀態</h3>
       <ul>
         <li>
-          <strong>立即阻斷所有操作</strong>：帳號標記 <code>deleted_at</code> 後，所有身分驗證相關操作均將被系統核心以 <code>ACCOUNT_DELETED</code> 拒絕。
+          <strong>立即阻斷所有操作</strong>：帳號刪除後，將無法再使用原帳號登入或進行任何操作。
         </li>
         <li>
           <strong>無法復原</strong>：一旦完成刪除，沒有任何管理員後台或客服能將原帳號、出席紀錄或可信度指標「復原」。
@@ -178,13 +178,13 @@ const toc = [
             </a>
           ) : (
             <span class="pending-pill">
-              正式客服信箱配置中（請透過 GitHub 儲存庫 Issue 聯絡開發團隊）
+              正式客服信箱準備中。目前請使用 App 內的帳號刪除功能。
             </span>
           )
         }
       </div>
       <p class="verification-note">
-        收到信件後，系統管理員將驗證信箱寄件者所有權，並於 7 個工作日內於後端執行 <code>delete_account()</code> 去識別化程序。
+        收到信件後，系統管理員將驗證信箱寄件者所有權，並於 7 個工作日內完成個人資料去識別化程序。
       </p>
     </div>
   </section>

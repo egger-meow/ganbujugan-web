@@ -24,6 +24,11 @@ for (const file of requiredFiles) {
   assert.ok(fs.existsSync(filePath), `Required build artifact missing: ${file}`);
   const content = fs.readFileSync(filePath, 'utf-8');
   assert.ok(content.length > 50, `File is unexpectedly empty or short: ${file}`);
+  assert.doesNotMatch(
+    content,
+    /github\.com|find-people-now|SPEC\.md|ERD\.md|delete_account|PENDING_CONFIRMATION|ACCOUNT_DELETED|propose_activity_type|propose_location|Production Domain/i,
+    `Developer-facing content must not appear in public build: ${file}`
+  );
   console.log(`✓ Verified route: ${file} (${content.length} bytes)`);
 }
 

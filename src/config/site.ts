@@ -35,7 +35,6 @@ export const siteConfig = {
   contact: {
     // Unconfigured support email - DO NOT invent one
     supportEmail: null as string | null,
-    githubRepoUrl: 'https://github.com/egger-meow/find-people-now',
   },
 
   // Verified Campus Scope (from find-people-now SPEC & migrations)
