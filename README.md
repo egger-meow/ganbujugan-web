@@ -1,9 +1,9 @@
-# 敢不敢揪 (Dare2Jo) 官方網站
+# 搞一個 (Dare2Jo) 官方網站
 
 > **找到現在也想一起的人。**
 > 讓原本可能不會發生的那場球、讀書、吃飯，真的發生。
 
-本專案為「**敢不敢揪**」專屬獨立官方網站與法定條款服務平台，採用 **Astro + TypeScript + Cloudflare Workers Static Assets + Wrangler** 建置，以極簡用戶端 JavaScript 與極致行動效能為核心，全站預先渲染 (SSG)，並透過 Cloudflare 邊緣網路高速分發。
+本專案為「**搞一個**」專屬獨立官方網站與法定條款服務平台，採用 **Astro + TypeScript + Cloudflare Workers Static Assets + Wrangler** 建置，以極簡用戶端 JavaScript 與極致行動效能為核心，全站預先渲染 (SSG)，並透過 Cloudflare 邊緣網路高速分發。
 
 - **正式營運網域**：`https://dare2jo.jjmowlab.com`
 - **服務學校範圍**：國立陽明交通大學 (NYCU) & 國立清華大學 (NTHU)

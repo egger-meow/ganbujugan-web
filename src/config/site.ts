@@ -12,14 +12,14 @@ export interface StoreChecklistItem {
 }
 
 export const siteConfig = {
-  siteName: '敢不敢揪',
+  siteName: '搞一個',
   appNameEn: 'Dare2Jo',
   canonicalUrl: 'https://dare2jo.jjmowlab.com',
   tagline: '找到現在也想一起的人。',
   concept: 'Want → Match → Happen',
   mission: '讓原本可能不會發生的那場球、讀書、吃飯，真的發生。',
   description:
-    '「敢不敢揪」是專為大學生設計的即時活動配對 App。以活動與動機為核心，盲配不看臉、不滑卡片、免當主揪，撮合現在也想做同一件事的人。測試階段僅限同校配對，目前率先開放清大與交大。',
+    '「搞一個」是專為大學生設計的即時活動配對 App。以活動與動機為核心，盲配不看臉、不滑卡片、免當主揪，撮合現在也想做同一件事的人。測試階段僅限同校配對，目前率先開放清大與交大。',
 
   // Store & Release Configuration (Editable as links become available)
   downloads: {

@@ -1,7 +1,7 @@
 {
   "name": "ganbujugan-web",
   "version": "1.0.0",
-  "description": "敢不敢揪 官方網站 | 找到現在也想一起的人",
+  "description": "搞一個 官方網站 | 找到現在也想一起的人",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
@@ -16,7 +16,7 @@
   },
   "keywords": [
     "dare2jo",
-    "敢不敢揪",
+    "搞一個",
     "NYCU",
     "NTHU",
     "activity-matching",

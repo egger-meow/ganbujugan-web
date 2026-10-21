@@ -27,7 +27,7 @@ export const assets = {
     src: '/images/icon.png',
     width: 1254,
     height: 1254,
-    alt: '敢不敢揪 官方應用程式圖標 - 活力翡翠綠貓咪吉祥物',
+    alt: '搞一個 官方應用程式圖標 - 活力翡翠綠貓咪吉祥物',
     isTransparent: false,
   } as ImageAssetMeta,
 
@@ -35,7 +35,7 @@ export const assets = {
     src: '/images/in-app banner.png',
     width: 2172,
     height: 724,
-    alt: '敢不敢揪 校園全景圖 - 綠意鐘樓與探索當下活動的夥伴',
+    alt: '搞一個 校園全景圖 - 綠意鐘樓與探索當下活動的夥伴',
     isTransparent: false,
   } as ImageAssetMeta,
 
@@ -45,7 +45,7 @@ export const assets = {
       src: '/images/login_screen.png',
       width: 1122,
       height: 1402,
-      alt: '敢不敢揪 潮酷貓咪吉祥物 - 穿著連帽衫與球鞋指向你，身旁圍繞著籃球、咖啡、書本與夥伴',
+      alt: '搞一個 潮酷貓咪吉祥物 - 穿著連帽衫與球鞋指向你，身旁圍繞著籃球、咖啡、書本與夥伴',
       isTransparent: true,
     } as ImageAssetMeta,
 
@@ -53,7 +53,7 @@ export const assets = {
       src: '/images/stickers/01_giant_thumbs_up.png',
       width: 620,
       height: 973,
-      alt: '敢不敢揪 貓咪吉祥物豎起大拇指比讚',
+      alt: '搞一個 貓咪吉祥物豎起大拇指比讚',
       isTransparent: true,
     } as ImageAssetMeta,
   },
